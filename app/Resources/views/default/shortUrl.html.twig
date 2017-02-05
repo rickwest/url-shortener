@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}youRLs.co.uk | URL Shortener{% endblock %}
+
+{% block body %}
+
+    {% include ':default/partials:header.html.twig' %}
+    <div class="wrapper">
+        <div class="parallax">
+            <div class="parallax-background">
+                <img class="parallax-background-image" src="{{ asset('assets/img/parallax-night-sky-image.jpg') }}">
+            </div>
+            <div class= "container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="description text-center">
+                            <h2>Short youRL created successfully!</h2>
+                            <div class="description-subtitle">
+                                <h5>Boom!</h5>
+                            </div>
+                        </div>
+                        <div class="input-group input-group-lg">
+                            <input type="text" id="shortUrl" name="shortUrl" value="{{ shortUrl }}" class="form-control" readonly>
+                                <span class="input-group-btn"><button type="submit" id="copyShortUrl" name="copyShortUrl" class="btn btn-info btn-fill btn">Copy</button></span>
+                        </div>
+                        <div class="buttons text-center">
+                            <a href="{{ url('homepage') }}" role="button" class="btn btn-lg btn-neutral">Shorten another link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include ':default/partials:featuresBlock.html.twig' %}
+        {% include ':default/partials:aboutBlock.html.twig' %}
+        {% include ':default/partials:footer.html.twig' %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+
+        var copyBtn = document.getElementById('copyShortUrl');
+        copyBtn.addEventListener('click', function () {
+
+        document.getElementById('shortUrl').select();
+        document.execCommand('copy');
+
+        copyBtn.className = 'btn btn-success btn-fill btn';
+        copyBtn.innerHTML = "<i class='fa fa-check'></i>&nbsp;Copied";
+
+        });
+    </script>
+{% endblock %}
+
