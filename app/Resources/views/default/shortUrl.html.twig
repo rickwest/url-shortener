@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}youRLs.co.uk | URL Shortener{% endblock %}
-
 {% block body %}
 
     {% include ':default/partials:header.html.twig' %}
@@ -34,21 +32,5 @@
         {% include ':default/partials:aboutBlock.html.twig' %}
         {% include ':default/partials:footer.html.twig' %}
     </div>
-{% endblock %}
-
-{% block javascripts %}
-    <script type="text/javascript">
-
-        var copyBtn = document.getElementById('copyShortUrl');
-        copyBtn.addEventListener('click', function () {
-
-        document.getElementById('shortUrl').select();
-        document.execCommand('copy');
-
-        copyBtn.className = 'btn btn-success btn-fill btn';
-        copyBtn.innerHTML = "<i class='fa fa-check'></i>&nbsp;Copied";
-
-        });
-    </script>
 {% endblock %}
 
