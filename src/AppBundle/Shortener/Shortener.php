@@ -31,13 +31,7 @@ class Shortener {
     }
 
     public function isExistingUrl($url) {
-        $rep = $this->registry->getRepository('AppBundle:UrlShortener');
-        $existingUrl = $rep->findOneByUrl($url);
-
-        if ($existingUrl) {
-            return true;
-        } else {
-            return false;
-        }
+        $urlShortener = $this->registry->getRepository('AppBundle:UrlShortener');
+        return $existingUrl = $urlShortener->findOneByUrl($url);
     }
 }

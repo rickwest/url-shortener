@@ -2,8 +2,8 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\UrlShortener;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,12 +21,6 @@ class UrlShortenerType extends AbstractType {
                     'title' => 'Please enter the link that you want to shorten'
                 ]
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Shorten',
-                'attr' => [
-                    'class' => 'btn btn-primary btn-fill',
-                ]
-            ])
         ;
     }
     
@@ -35,7 +29,7 @@ class UrlShortenerType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\UrlShortener'
+            'data_class' => UrlShortener::class
         ]);
     }
 }

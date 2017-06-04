@@ -19,25 +19,26 @@ class DefaultController extends Controller {
      * @Route("/", name="homepage")
      */
     public function indexAction(Request $request) {
-        $urlShortener = new UrlShortener();
         $form = $this->createForm(UrlShortenerType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $url = $form->getData()->getUrl();
+        if ($form->isValid()) {
+            /** @var UrlShortener $urlShortener */
+            $urlShortener = $form->getData();
 
-            $existingUrl = $this->getShortener()->isExistingUrl($url);
+            $existingUrl = $this->getShortener()->isExistingUrl($urlShortener->getUrl());
 
-            if ($existingUrl){
-                return $this->render('default/existingUrl.html.twig', [
-                    'existingUrl' => $existingUrl
+            if ($existingUrl) {
+                return $this->json([
+                    'title' => 'youRL already exists!',
+                    'subtitle' => 'Copy the existing short youRL and get to work!',
+                    'url' => $this->generateUrl('redirect', ['shortCode' => $existingUrl->getShortCode()], UrlGeneratorInterface::ABSOLUTE_URL)
                 ]);
             }
 
             $shortCode = $this->getShortener()->generateShortCode();
 
             $urlShortener
-                ->setUrl($url)
                 ->setShortcode($shortCode)
                 ->setCreated(new \DateTime('now'));
 
@@ -47,16 +48,16 @@ class DefaultController extends Controller {
 
             $shortUrl = $this->generateUrl('redirect', ['shortCode' => $shortCode], UrlGeneratorInterface::ABSOLUTE_URL);
 
-            return $this->render('default/shortUrl.html.twig', [
-                'shortUrl' => $shortUrl
+            return $this->json([
+                'title' => 'Short youRL created successfully!',
+                'subtitle' => 'Boom!',
+                'url' => $shortUrl
             ]);
         }
 
-        $vars = [
+        return $this->render('default/index.html.twig', [
             'form' => $form->createView()
-        ];
-
-        return $this->render('default/index.html.twig', $vars);
+        ]);
     }
 
     /**
@@ -65,5 +66,4 @@ class DefaultController extends Controller {
     public function redirectAction($shortCode) {
         return $this->redirect($this->getShortener()->getUrlFromShortCode($shortCode));
     }
-
 }
