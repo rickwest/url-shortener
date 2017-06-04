@@ -12,6 +12,7 @@ $(document).ready(function(){
                $('#title').text(data.title);
                $('#subtitle').text(data.subtitle);
                $('#submitUrl').addClass('hidden');
+               $('#clearUrl').removeClass('hidden');
                $('#copyShortUrl').removeClass('hidden');
            })
 
@@ -26,4 +27,15 @@ $(document).ready(function(){
         this.className = 'btn btn-success btn-fill btn';
         this.innerHTML = "<i class='fa fa-check'></i>&nbsp;Copied";
     });
+
+    $('#clearUrl').click(function(){
+        $('#url_shortener_url').val('');
+        $('#title').text("Bigger isn't always better.");
+        $('#subtitle').text('Enter your long link and let us generate a short youRL for you instead!');
+        $('#submitUrl').removeClass('hidden');
+        $('#clearUrl').addClass('hidden');
+        $('#copyShortUrl').addClass('hidden');
+    });
+
+    $('[data-toggle="tooltip"]').tooltip();
 });
