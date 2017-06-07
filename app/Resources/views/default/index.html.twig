@@ -2,40 +2,108 @@
 
 {% block body %}
 
-{% include ':default/partials:header.html.twig' %}
+{% include 'default/partials/nav.html.twig' %}
 
 <div class="wrapper">
-    <div class="parallax">
-        <div class="parallax-background">
-            <img class="parallax-background-image" src="{{ asset('assets/img/parallax-night-sky-image.jpg') }}">
+    <div class="page-header page-header-small">
+        <div class="page-header-image" data-parallax="true" style="background-image: url('https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/JAECP91UX5.jpg');">
         </div>
-        <div class= "container">
+        <div class="container">
+            <div class="content-center">
+                <h1 class="title">Bigger isn't always better.</h1>
+                <h5>Enter your long link and let us generate a short youRL for you instead!</h5>
+                {% form_theme form 'bootstrap_3_layout.html.twig' %}
+                {{ form_start(form) }}
+                <div class="input-group input-group-lg input">
+                     <span class="input-group-btn">
+                        <button id="clearUrl" type="button" name="clearUrl" class="btn btn-default" style="display: none;" data-toggle="tooltip" data-placement="bottom" title="Clear and shorten another"><i class="fa fa-times"></i></button>
+                     </span>
+                    {{ form_widget(form.url) }}
+                    <span class="input-group-btn">
+                        <button id="submitUrl" type="submit" name="submitUrl" class="btn btn-primary">Shorten</button>
+                        <button id="copyShortUrl" type="button" name="copyShortUrl" class="btn btn-info" style="display: none;" data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard">Copy</button>
+                    </span>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <div class="section text-center">
+        <div class="container">
             <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="description text-center">
-                        <h2 id="title">Bigger isn't always better.</h2>
-                        <div class="description-subtitle">
-                            <h5 id="subtitle">Enter your long link and let us generate a short youRL for you instead!</h5>
+                <div class="col-md-10 offset-md-1">
+                    <h2 class="title">Features and Benefits</h2>
+                    <h5 class="description">Links are getting longer and longer and we believe that size does matter. Use our service to shorten your links and track performance.</h5>
+                </div>
+            </div>
+            <div class="team">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="icon text-primary">
+                                <i class="pe-7s-link"></i>
+                            </div>
+                            <h4 class="title">Shorten your links</h4>
+                            <p class="description">Save precious characters and make your twitter and social media posts more concise and appealing.</p>
                         </div>
                     </div>
-                    {% form_theme form 'bootstrap_3_layout.html.twig' %}
-                    {{ form_start(form) }}
-                    <div class="input-group input-group-lg">
-                        {{ form_widget(form.url) }}
-                        <span class="input-group-btn">
-                            <button id="submitUrl" type="submit" name="submitUrl" class="btn btn-primary btn-fill">Shorten</button>
-                            <button id="clearUrl" type="button" name="clearUrl" class="btn btn-default btn-fill hidden" data-toggle="tooltip" data-placement="bottom" title="Clear and shorten another"><i class="fa fa-times"></i></button>
-                            <button id="copyShortUrl" type="button" name="copyShortUrl" class="btn btn-info btn-fill hidden" data-toggle="tooltip" data-placement="bottom" title="Copy to clipboard">Copy</button>
-                        </span>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="icon text-primary">
+                                <i class="pe-7s-shuffle"></i>
+                            </div>
+                            <h4 class="title">Hide your affiliates</h4>
+                            <p class="description">If you are marketer that doesn't want people to know when you're posting an affiliate link you can use a custom youRL to hide it.</p>
+                        </div>
                     </div>
-                    {{ form_end(form) }}
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="icon text-primary">
+                                <i class="pe-7s-graph1"></i>
+                            </div>
+                            <h4 class="title">Track your clicks</h4>
+                            <p class="description">youRLs.co.uk allows you to track the number of clicks and visits to a website via its short link.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    {% include ':default/partials:featuresBlock.html.twig' %}
-    {% include ':default/partials:aboutBlock.html.twig' %}
-    {% include ':default/partials:footer.html.twig' %}
+    <div class="separator separator-primary"></div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2 text-center">
+                    <h3 class="title">About</h3>
+                    <h5 class="description">youRLs.co.uk is a small portfolio project built with PHP and the Symfony framework.
+                        Please, feel free to get in touch if you have any suggestions for improvement or if you just want to say hello!
+                    </h5>
+                    <a href="https://twitter.com/rick_west8" class="btn btn-neutral btn-icon btn-twitter" rel="tooltip" title="" data-original-title="Follow on Twitter" target="_blank">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/richard-west-61982161/" class="btn btn-neutral btn-icon btn-linkedin" rel="tooltip" title="" data-original-title="Connect on Linkedin" target="_blank">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/rickwest/urlshortener" class="btn btn-neutral btn-icon btn-github" rel="tooltip" title="" data-original-title="Star on Github" target="_blank">
+                        <i class="fa fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer footer-default">
+        <div class="container">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{{ url('homepage') }}">youRLs.co.uk</a>
+                    </li>
+                </ul>
+           </nav>
+            <div class="copyright">
+                    © {{ 'now' | date('Y') }}. Built with <img src="{{ asset('assets/img/php-icon-white.gif') }}"> and <i class="fa fa-coffee"></i> by <a href="https://rickwest.co.uk" target="_blank">Rick</a>
+            </div>
+        </div>
+    </footer>
 </div>
-
 {% endblock %}

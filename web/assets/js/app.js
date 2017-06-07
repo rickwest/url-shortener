@@ -1,23 +1,21 @@
 $(document).ready(function(){
+
    $('form').submit(function(e) {
        e.preventDefault();
 
        $.ajax({
            type: 'post',
            url: '/',
-           data: $(this).serialize()
+           data: $(this).serialize(),
+           dataType: 'json'
        })
            .done(function(data) {
-               $('#url_shortener_url').val(data.url);
+               $('#url_shortener_url').val(data.url).focus();
                $('#title').text(data.title);
                $('#subtitle').text(data.subtitle);
-               $('#submitUrl').addClass('hidden');
-               $('#clearUrl').removeClass('hidden');
-               $('#copyShortUrl').removeClass('hidden');
-           })
-
-           .fail(function(data) {
-               console.log('fail' + data)
+               $('#submitUrl').hide();
+               $('#clearUrl').show();
+               $('#copyShortUrl').show();
            })
    });
 
@@ -29,12 +27,12 @@ $(document).ready(function(){
     });
 
     $('#clearUrl').click(function(){
-        $('#url_shortener_url').val('');
+        $('#url_shortener_url').val('').focus();
         $('#title').text("Bigger isn't always better.");
         $('#subtitle').text('Enter your long link and let us generate a short youRL for you instead!');
-        $('#submitUrl').removeClass('hidden');
-        $('#clearUrl').addClass('hidden');
-        $('#copyShortUrl').addClass('hidden');
+        $('#submitUrl').show();
+        $('#clearUrl').hide();
+        $('#copyShortUrl').hide();
     });
 
     $('[data-toggle="tooltip"]').tooltip();

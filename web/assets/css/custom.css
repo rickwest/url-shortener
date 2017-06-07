@@ -1,4 +1,24 @@
-.description-subtitle {
-    padding-top: 20px;
-    padding-bottom: 20px;
+.section {
+    padding: 100px 0;
+}
+
+.icon i {
+     font-size: 63px;
+     width: 85px;
+     height: 85px;
+     line-height: 80px;
+     text-align: center;
+     border-radius: 50%;
+     margin: 0 auto;
+     margin-top: 20px;
+ }
+
+ .card {
+     min-height: 390px;
+     padding: 10px 30px;
+     margin-top: 30px;
+ }
+
+#url_shortener_url .form-control {
+    background-color: #ffffff;
 }
