@@ -10,12 +10,17 @@ $(document).ready(function(){
            dataType: 'json'
        })
            .done(function(data) {
-               $('#url_shortener_url').val(data.url).focus();
-               $('#title').text(data.title);
-               $('#subtitle').text(data.subtitle);
-               $('#submitUrl').hide();
-               $('#clearUrl').show();
-               $('#copyShortUrl').show();
+               if (!data.errorMessage) {
+                   $('#notifications').html('');
+                   $('#url_shortener_url').val(data.url).focus();
+                   $('#title').text(data.title);
+                   $('#subtitle').text(data.subtitle);
+                   $('#submitUrl').hide();
+                   $('#clearUrl').show();
+                   $('#copyShortUrl').show();
+               } else {
+                   $('#notifications').html('<div class="alert alert-danger">'+ data.errorMessage +'</div>')//show notification dialog
+               }
            })
    });
 

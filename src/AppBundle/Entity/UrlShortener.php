@@ -42,87 +42,82 @@ class UrlShortener
      */
     private $created;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="clicks", type="integer", nullable=true)
+     */
+    private $clicks;
 
     /**
-     * Get id
-     *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
     /**
-     * Set url
-     *
-     * @param string $url
-     *
-     * @return UrlShortener
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * Get url
-     *
      * @return string
      */
-    public function getUrl()
-    {
+    public function getUrl() {
         return $this->url;
     }
 
     /**
-     * Set shortSode
-     *
-     * @param string $shortCode
-     *
+     * @param string $url
      * @return UrlShortener
      */
-    public function setShortCode($shortcode)
-    {
-        $this->shortCode = $shortcode;
-
+    public function setUrl($url) {
+        $this->url = $url;
         return $this;
     }
 
     /**
-     * Get shortCode
-     *
      * @return string
      */
-    public function getShortCode()
-    {
+    public function getShortCode() {
         return $this->shortCode;
     }
 
     /**
-     * Set created
-     *
-     * @param \DateTime $created
-     *
+     * @param string $shortCode
      * @return UrlShortener
      */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
+    public function setShortCode($shortCode) {
+        $this->shortCode = $shortCode;
         return $this;
     }
 
     /**
-     * Get created
-     *
      * @return \DateTime
      */
-    public function getCreated()
-    {
+    public function getCreated() {
         return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     * @return UrlShortener
+     */
+    public function setCreated($created) {
+        $this->created = $created;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getClicks() {
+        return $this->clicks;
+    }
+
+    /**
+     * @param int $clicks
+     * @return UrlShortener
+     */
+    public function setClicks($clicks) {
+        $this->clicks = $clicks;
+        return $this;
     }
 }
 

@@ -3,6 +3,8 @@
 namespace AppBundle\Shortener;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Shortener {
@@ -32,6 +34,16 @@ class Shortener {
 
     public function isExistingUrl($url) {
         $urlShortener = $this->registry->getRepository('AppBundle:UrlShortener');
-        return $existingUrl = $urlShortener->findOneByUrl($url);
+        return $urlShortener->findOneByUrl($url);
+    }
+
+    public function isGenuineUrl($url) {
+        $client = new Client();
+        try {
+            $res = $client->request('GET', $url);
+            return $res->getStatusCode() === 200;
+        } catch (RequestException $e) {
+            return false;
+        }
     }
 }

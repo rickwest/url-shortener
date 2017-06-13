@@ -26,6 +26,8 @@ class DefaultController extends Controller {
             /** @var UrlShortener $urlShortener */
             $urlShortener = $form->getData();
 
+            //need to 'clean url' and make sure we are handling and saving them in same format.
+
             $existingUrl = $this->getShortener()->isExistingUrl($urlShortener->getUrl());
 
             if ($existingUrl) {
@@ -36,10 +38,24 @@ class DefaultController extends Controller {
                 ]);
             }
 
+            // if its not already an existing url then we can go off and
+            // check whether its a genuine url that has been entered and handle that
+            // if its not then we need to return an error message
+            // or can we an a custom error to the form type?
+
+            $genuineUrl = $this->getShortener()->isGenuineUrl($urlShortener->getUrl());
+
+            if (!$genuineUrl) {
+                return $this->json([
+                    'errorMessage' => 'We are unable to generate a youRL for this link. Please check that you entered the link correctly'
+                ]);
+            }
+
             $shortCode = $this->getShortener()->generateShortCode();
 
             $urlShortener
                 ->setShortcode($shortCode)
+                ->setClicks(0)
                 ->setCreated(new \DateTime('now'));
 
             $em = $this->getDoctrine()->getManager();
@@ -50,7 +66,7 @@ class DefaultController extends Controller {
 
             return $this->json([
                 'title' => 'Short youRL created successfully!',
-                'subtitle' => 'Boom!',
+                'subtitle' => 'Boom! Just copy the new youRL and get to work!',
                 'url' => $shortUrl
             ]);
         }
